@@ -1,0 +1,20 @@
+---
+    - name: Set OpenStack packages for CentOS
+      set_fact:
+        openstack_packages_centos:
+          - openstack-packstack
+          - mariadb-server
+          - rabbitmq-server
+          - memcached
+          - etcd
+
+    - name: Install and configure EPEL repository for CentOS
+      yum:
+        name: epel-release
+        state: latest
+
+    - name: Installing OpenStack packages for CentOS
+      yum:
+        name: "{{ openstack_packages_centos }}"
+        state: present
+
